@@ -10,16 +10,21 @@ import java.io.IOException;
 
 public class ResultHandler implements FutureCallback<HttpResponse> {
     private static final Logger log = LoggerFactory.getLogger(ResultHandler.class);
+    private ResultParser resultParser = new ResultParser();
 
     @Override
     public void completed(HttpResponse httpResponse) {
         log.info("Request completed.");
-        String result = null;
+        String responseString = null;
         try {
-            result = EntityUtils.toString(httpResponse.getEntity(), "utf-8");
-            log.info(result);
+            responseString = EntityUtils.toString(httpResponse.getEntity(), "utf-8");
         } catch (IOException ex) {
-            log.error(ex.getMessage(), ex);
+            log.error("Error when get response string.", ex);
+        }
+
+        ResultModel resultModel = resultParser.parse(responseString);
+        if (resultModel != null) {
+            save(resultModel);
         }
     }
 
@@ -31,5 +36,9 @@ public class ResultHandler implements FutureCallback<HttpResponse> {
     @Override
     public void cancelled() {
         log.warn("Request cancelled.");
+    }
+
+    private void save(ResultModel resultModel){
+
     }
 }
