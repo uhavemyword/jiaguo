@@ -1,4 +1,4 @@
-package com.cp.jiaguo.fetcher;
+package com.cp.jiaguo.producer;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.concurrent.FutureCallback;

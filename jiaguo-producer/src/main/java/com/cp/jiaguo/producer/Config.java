@@ -1,4 +1,4 @@
-package com.cp.jiaguo.fetcher;
+package com.cp.jiaguo.producer;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

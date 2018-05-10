@@ -1,4 +1,4 @@
-package com.cp.jiaguo.fetcher;
+package com.cp.jiaguo.producer;
 
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCookieStore;
