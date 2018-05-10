@@ -25,5 +25,6 @@
 /nbdist/
 /.nb-gradle/
 
+.mvn
 *.zip
 *.rar
