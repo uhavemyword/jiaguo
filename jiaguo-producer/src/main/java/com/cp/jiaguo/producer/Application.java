@@ -41,7 +41,7 @@ public class Application implements ApplicationContextAware {
                 properties.load(stream);
             }
             String lastId = properties.getProperty(LAST_ID_KEY, "0");
-            log.info("last id loaded with value {}", lastId);
+            log.debug("last id loaded with value {}", lastId);
             config.setLastId(Integer.parseInt(lastId));
         } catch (Exception ex) {
             log.error("Error when loading last id.", ex);
@@ -49,7 +49,7 @@ public class Application implements ApplicationContextAware {
     }
 
     public static void saveLastId() {
-        log.info("saving the last id now.");
+        log.debug("saving the last id now.");
         try {
             String path = config.getLastIdFile();
             if (!Files.exists(Paths.get(path))) {
@@ -64,7 +64,7 @@ public class Application implements ApplicationContextAware {
             try (OutputStream stream = new FileOutputStream(path)) {
                 properties.store(stream, null);
             }
-            log.info("last id saved in {} with value {}", path, config.getLastId());
+            log.debug("last id saved in {} with value {}", path, config.getLastId());
         } catch (Exception ex) {
             log.error("Error when saving last id.", ex);
         }

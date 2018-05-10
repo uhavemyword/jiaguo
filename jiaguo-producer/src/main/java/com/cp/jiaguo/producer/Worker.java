@@ -17,7 +17,8 @@ public class Worker {
 
     private static final Logger log = LoggerFactory.getLogger(Worker.class);
     private final CloseableHttpAsyncClient httpClient;
-    private final ResultHandler resultHandler = new ResultHandler();
+    @Autowired
+    private ResultHandler resultHandler;
     @Autowired
     private Config config;
 
@@ -42,7 +43,7 @@ public class Worker {
     }
 
     public void visit(URI uri) {
-        log.info("visiting {}", uri);
+        log.debug("visiting {}", uri);
         final HttpGet request = new HttpGet(uri);
         httpClient.execute(request, resultHandler);
     }
