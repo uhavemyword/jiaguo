@@ -21,13 +21,15 @@ public class ResultHandler implements FutureCallback<HttpResponse> {
 
     private ResultParser resultParser = new ResultParser();
     private ConnectionFactory rabbitFactory;
+    private Connection connection;
 
-    public ResultHandler(Config config) {
+    public ResultHandler(Config config) throws IOException, TimeoutException {
         rabbitFactory = new ConnectionFactory();
         rabbitFactory.setHost(config.getRabbitHost());
         rabbitFactory.setPort(config.getRabbitPort());
         rabbitFactory.setUsername(config.getRabbitUser());
         rabbitFactory.setPassword(config.getRabbitPassword());
+        connection = rabbitFactory.newConnection();
     }
 
     @Override
@@ -59,13 +61,12 @@ public class ResultHandler implements FutureCallback<HttpResponse> {
     }
 
     private void save(ResultModel resultModel) {
-        try (Connection connection = rabbitFactory.newConnection()) {
-            try (Channel channel = connection.createChannel()) {
-                channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-                byte[] message = JSON.toJSONBytes(resultModel);
-                channel.basicPublish("", QUEUE_NAME, null, message);
-                log.debug("Message sent to the rabbit server.");
-            }
+        try (Channel channel = connection.createChannel()) {
+            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            byte[] message = JSON.toJSONBytes(resultModel);
+            channel.basicPublish("", QUEUE_NAME, null, message);
+            log.debug("Message sent to the rabbit server.");
+
         } catch (TimeoutException ex) {
             log.error(ex.getMessage(), ex);
         } catch (IOException ex) {
