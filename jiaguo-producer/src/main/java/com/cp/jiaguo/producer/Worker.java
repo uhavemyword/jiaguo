@@ -10,20 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.net.URI;
 
 @Component
 public class Worker {
 
     private static final Logger log = LoggerFactory.getLogger(Worker.class);
-    private final CloseableHttpAsyncClient httpClient;
+    private CloseableHttpAsyncClient httpClient;
     @Autowired
     private ResultHandler resultHandler;
     @Autowired
     private Config config;
 
-    public Worker() {
-        Application.loadLastId();
+    @PostConstruct
+    public void init() {
+        ProducerApplication.loadLastId();
         httpClient = HttpAsyncClients.custom()
                 .setDefaultCookieStore(new BasicCookieStore())
                 .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36")

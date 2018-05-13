@@ -18,14 +18,14 @@ import java.util.Properties;
 @SpringBootApplication
 @EnableScheduling
 @EnableConfigurationProperties
-public class Application implements ApplicationContextAware {
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+public class ProducerApplication implements ApplicationContextAware {
+    private static final Logger log = LoggerFactory.getLogger(ProducerApplication.class);
     private static final String LAST_ID_KEY = "lastId";
     private static ApplicationContext context;
     private static Config config;
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(ProducerApplication.class, args);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> saveLastId()));
     }
 

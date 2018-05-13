@@ -9,8 +9,10 @@ import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -18,18 +20,24 @@ import java.util.concurrent.TimeoutException;
 public class ResultHandler implements FutureCallback<HttpResponse> {
     private static final Logger log = LoggerFactory.getLogger(ResultHandler.class);
     private final static String QUEUE_NAME = "jiaguo";
-
-    private ResultParser resultParser = new ResultParser();
+    @Autowired
+    private Config config;
+    @Autowired
+    private ResultParser resultParser;
     private ConnectionFactory rabbitFactory;
     private Connection connection;
+    private Channel channel;
 
-    public ResultHandler(Config config) throws IOException, TimeoutException {
+    @PostConstruct
+    public void init() throws IOException, TimeoutException {
         rabbitFactory = new ConnectionFactory();
         rabbitFactory.setHost(config.getRabbitHost());
         rabbitFactory.setPort(config.getRabbitPort());
         rabbitFactory.setUsername(config.getRabbitUser());
         rabbitFactory.setPassword(config.getRabbitPassword());
         connection = rabbitFactory.newConnection();
+        channel = connection.createChannel();
+        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
     }
 
     @Override
@@ -61,15 +69,12 @@ public class ResultHandler implements FutureCallback<HttpResponse> {
     }
 
     private void save(ResultModel resultModel) {
-        try (Channel channel = connection.createChannel()) {
+        try {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             byte[] message = JSON.toJSONBytes(resultModel);
             channel.basicPublish("", QUEUE_NAME, null, message);
             log.debug("Message sent to the rabbit server.");
-
-        } catch (TimeoutException ex) {
-            log.error(ex.getMessage(), ex);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
     }
