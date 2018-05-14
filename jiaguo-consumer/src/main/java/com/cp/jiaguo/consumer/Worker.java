@@ -33,7 +33,7 @@ public class Worker {
         rabbitFactory.setPassword(config.getRabbitPassword());
     }
 
-    private void ensureChannelOpen() {
+    private boolean ensureChannelOpen() {
         try {
             if (connection == null || !connection.isOpen()) {
                 connection = rabbitFactory.newConnection();
@@ -43,15 +43,19 @@ public class Worker {
             }
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             log.debug("ensureChannelOpen() success.");
+            return true;
         } catch (Exception ex) {
             log.error("ensureChannelOpen() failed.", ex);
         }
+        return false;
     }
 
     @Scheduled(fixedRateString = "${my.task.interval}")
     public void doWork() throws IOException, InterruptedException, TimeoutException {
         log.debug("Start doWork().");
-        ensureChannelOpen();
+        if (!ensureChannelOpen()) {
+            return;
+        }
 
         int messageCount = (int) channel.messageCount(QUEUE_NAME);
         log.debug("{} message found in the {} queue.", messageCount, QUEUE_NAME);

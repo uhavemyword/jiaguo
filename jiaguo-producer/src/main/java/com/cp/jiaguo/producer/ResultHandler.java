@@ -35,9 +35,23 @@ public class ResultHandler implements FutureCallback<HttpResponse> {
         rabbitFactory.setPort(config.getRabbitPort());
         rabbitFactory.setUsername(config.getRabbitUser());
         rabbitFactory.setPassword(config.getRabbitPassword());
-        connection = rabbitFactory.newConnection();
-        channel = connection.createChannel();
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+    }
+
+    private boolean ensureChannelOpen() {
+        try {
+            if (connection == null || !connection.isOpen()) {
+                connection = rabbitFactory.newConnection();
+            }
+            if (channel == null || !channel.isOpen()) {
+                channel = connection.createChannel();
+            }
+            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            log.debug("ensureChannelOpen() success.");
+            return true;
+        } catch (Exception ex) {
+            log.error("ensureChannelOpen() failed.", ex);
+        }
+        return false;
     }
 
     @Override
@@ -68,9 +82,13 @@ public class ResultHandler implements FutureCallback<HttpResponse> {
         log.warn("Request cancelled.");
     }
 
+
     private void save(ResultModel resultModel) {
         try {
             byte[] message = JSON.toJSONBytes(resultModel);
+            if (!ensureChannelOpen()) {
+                return;
+            }
             channel.basicPublish("", QUEUE_NAME, null, message);
             log.debug("Message sent to the rabbit server.");
         } catch (Exception ex) {
