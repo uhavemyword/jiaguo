@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/jiaguo.iml" filepath="$PROJECT_DIR$/.idea/jiaguo.iml" />
       <module fileurl="file://$PROJECT_DIR$/jiaguo-consumer/jiaguo-consumer.iml" filepath="$PROJECT_DIR$/jiaguo-consumer/jiaguo-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jiaguo-parent.iml" filepath="$PROJECT_DIR$/jiaguo-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/jiaguo-producer/jiaguo-producer.iml" filepath="$PROJECT_DIR$/jiaguo-producer/jiaguo-producer.iml" />
       <module fileurl="file://$PROJECT_DIR$/jiaguo-webapi/jiaguo-webapi.iml" filepath="$PROJECT_DIR$/jiaguo-webapi/jiaguo-webapi.iml" />
     </modules>

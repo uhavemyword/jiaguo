@@ -13,6 +13,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="jiaguo-consumer" target="1.8" />
+      <module name="jiaguo-parent" target="1.8" />
       <module name="jiaguo-producer" target="1.8" />
       <module name="jiaguo-webapi" target="1.8" />
     </bytecodeTargetLevel>
