@@ -70,7 +70,6 @@ public class ResultHandler implements FutureCallback<HttpResponse> {
 
     private void save(ResultModel resultModel) {
         try {
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             byte[] message = JSON.toJSONBytes(resultModel);
             channel.basicPublish("", QUEUE_NAME, null, message);
             log.debug("Message sent to the rabbit server.");
