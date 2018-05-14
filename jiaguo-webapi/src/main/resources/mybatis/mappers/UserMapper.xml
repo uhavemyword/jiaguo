@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cp.jiaguo.webapi.dao.UserDao">
+
+    <resultMap id="UserWithContacts" type="User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <collection property="contacts" ofType="Contact" resultMap="com.cp.jiaguo.webapi.dao.ContactDao.ContactResultMap"
+                    columnPrefix="contact_"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="UserWithContacts">
+		select u.id, u.name, u.email, c.id as contact_id, c.phone as contact_phone, c.address as contact_address
+		from user u
+		left outer join contact c on c.user_id = u.id
+		order by u.id desc
+	</select>
+
+    <select id="getById" resultMap="UserWithContacts">
+		select u.id, u.name, u.email, c.id as contact_id, c.phone as contact_phone, c.address as contact_address
+		from user u
+		left outer join contact c on c.user_id = u.id
+		where u.id = #{id}
+	</select>
+
+    <insert id="insert" parameterType="User">
+        <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into user(name,email) values(#{name},#{email})
+    </insert>
+
+    <update id="update" parameterType="User">
+        update user
+        set name = #{name}, email = #{email}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from user where id = #{id}
+    </delete>
+
+</mapper>

@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/jiaguo-consumer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jiaguo-producer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jiaguo-webapi" charset="UTF-8" />
   </component>
 </project>

@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="jiaguo-consumer" />
         <module name="jiaguo-producer" />
+        <module name="jiaguo-webapi" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="jiaguo-consumer" target="1.8" />
       <module name="jiaguo-producer" target="1.8" />
+      <module name="jiaguo-webapi" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
