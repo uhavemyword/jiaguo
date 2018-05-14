@@ -33,7 +33,7 @@ public class Worker {
         httpClient.start();
     }
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRateString = "${my.task.interval}")
     public void doWork() {
         URI uri = getNextUri();
         visit(uri);

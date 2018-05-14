@@ -35,7 +35,7 @@ public class Worker {
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
     }
 
-    @Scheduled(fixedRate = 3000)
+    @Scheduled(fixedRateString = "${my.task.interval}")
     public void doWork() throws IOException {
         final Consumer consumer = new DefaultConsumer(channel) {
             @Override
