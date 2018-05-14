@@ -1,5 +1,7 @@
 package com.cp.jiaguo.producer;
 
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
@@ -27,7 +29,7 @@ public class Worker {
     public void init() {
         ProducerApplication.loadLastId();
         httpClient = HttpAsyncClients.custom()
-                .setDefaultCookieStore(new BasicCookieStore())
+                .setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build())
                 .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36")
                 .build();
         httpClient.start();
