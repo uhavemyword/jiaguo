@@ -34,5 +34,10 @@ export const Navigation = [
     name: 'Login',
     url: '/account/login',
     icon: 'icon-login'
+  },
+  {
+    name: 'GitHub',
+    url: 'https://github.com/uhavemyword/jiaguo',
+    icon: 'icon-social-github'
   }
 ];
