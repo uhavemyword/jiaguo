@@ -1,3 +1,26 @@
 <div [ngBusy]="busy">
-  <app-product-card *ngFor="let p of products" [product]=p></app-product-card>
+
+  <div *ngFor="let p of products; let i=index">
+    <div class="row" *ngIf="i % 6 == 0">
+      <div class="col-md-6 col-lg-4">
+        <app-product-card [info]="products[i]"></app-product-card>
+      </div>
+      <div class="col-md-6 col-lg-4" *ngIf="products.length > (i + 1)">
+        <app-product-card [info]="products[i+1]"></app-product-card>
+      </div>
+      <div class="col-md-6 col-lg-4" *ngIf="products.length > (i + 2)">
+        <app-product-card [info]="products[i+2]"></app-product-card>
+      </div>
+      <div class="col-md-6 col-lg-4" *ngIf="products.length > (i + 3)">
+        <app-product-card [info]="products[i+3]"></app-product-card>
+      </div>
+      <div class="col-md-6 col-lg-4" *ngIf="products.length > (i + 4)">
+        <app-product-card [info]="products[i+4]"></app-product-card>
+      </div>
+      <div class="col-md-6 col-lg-4" *ngIf="products.length > (i + 5)">
+        <app-product-card [info]="products[i+5]"></app-product-card>
+      </div>
+    </div>
+  </div>
+
 </div>

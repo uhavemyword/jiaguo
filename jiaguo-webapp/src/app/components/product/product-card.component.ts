@@ -8,7 +8,15 @@ import { ProductInfo } from './../../models';
 })
 export class ProductCardComponent implements OnInit {
   @Input()
-  product: ProductInfo;
+  info: ProductInfo;
+
+  getImgSrc(): string {
+    return `${this.info.product.productMediaInfoList[0].mediaUrl}@400w_300h_80Q_1l`;
+  }
+
+  getProductLink(): string {
+    return `https://www.zhenguo.com/housing/${this.info.product.productId}`;
+  }
 
   constructor() { }
 

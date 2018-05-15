@@ -1,3 +1,17 @@
-<p>
-  {{ product.product.description }}
-</p>
+<div class="card">
+  <a [href]="getProductLink()" [title]="info.product.title">
+    <div class="card-body">
+      <img [src]="getImgSrc()" />
+    </div>
+    <div class="card-footer">
+      <div class="product-title ellipsis">
+        {{ info.product.title }}
+      </div>
+      <div>
+        <span class="product-price">
+          <i class="currency">¥</i>{{info.product.price / 100}}</span>
+        <span class="product-prop">{{info.product.addressInfo.cityName}} · {{info.product.addressInfo.districtName}}</span>
+      </div>
+    </div>
+  </a>
+</div>
