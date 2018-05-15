@@ -5,6 +5,7 @@ import { NgBusyModule } from 'ng-busy';
 import { UsersComponent } from './users.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { UserDetailComponent } from './user-detail.component';
+import { UserService } from './../../services';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { UserDetailComponent } from './user-detail.component';
     NgBusyModule,
     AdminRoutingModule
   ],
-  declarations: [UsersComponent, UserDetailComponent]
+  declarations: [UsersComponent, UserDetailComponent],
+  providers: [UserService]
 })
 export class AdminModule { }

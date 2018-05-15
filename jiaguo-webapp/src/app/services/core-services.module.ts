@@ -21,8 +21,7 @@ export class CoreServicesModule {
                 AuthService,
                 AuthGuardService,
                 AlertService,
-                DialogService,
-                UserService
+                DialogService
             ]
         };
     }

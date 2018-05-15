@@ -2,7 +2,12 @@ export const Navigation = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    icon: 'icon-speedometer',
+    icon: 'icon-speedometer'
+  },
+  {
+    name: 'Product',
+    url: '/products',
+    icon: 'icon-emotsmile',
     badge: {
       variant: 'info',
       text: 'NEW'

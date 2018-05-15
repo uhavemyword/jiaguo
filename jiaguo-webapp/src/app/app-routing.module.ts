@@ -11,7 +11,7 @@ import {
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'products',
     pathMatch: 'full',
   },
   {
@@ -26,6 +26,11 @@ export const routes: Routes = [
         path: 'dashboard',
         canActivateChild: [AuthGuardService],
         loadChildren: './components/dashboard/dashboard.module#DashboardModule'
+      },
+      {
+        path: 'products',
+        canActivateChild: [AuthGuardService],
+        loadChildren: './components/product/product.module#ProductModule'
       },
       {
         path: 'admin',
