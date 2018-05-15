@@ -11,6 +11,7 @@ public class ResultModel {
 
     public Product product;
     public boolean isUserFav;
+    public String plainJson;
 
     public static class Product {
         public Product() {

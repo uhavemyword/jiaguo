@@ -19,6 +19,7 @@ public class ResultParser {
         if (matcher.find()) {
             String jsonString = matcher.group(1);
             ResultModel resultModel = JSON.parseObject(jsonString, ResultModel.class);
+            resultModel.plainJson = jsonString;
             return resultModel;
         }
         return null;

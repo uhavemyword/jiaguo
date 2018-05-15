@@ -85,7 +85,8 @@ public class ResultHandler implements FutureCallback<HttpResponse> {
 
     private void save(ResultModel resultModel) {
         try {
-            byte[] message = JSON.toJSONBytes(resultModel);
+            // byte[] message = JSON.toJSONBytes(resultModel);
+            byte[] message = resultModel.plainJson.getBytes();
             if (!ensureChannelOpen()) {
                 return;
             }
