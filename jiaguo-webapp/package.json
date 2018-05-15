@@ -1,0 +1,81 @@
+{
+  "name": "jiaguo-webapp",
+  "version": "0.0.1",
+  "description": "jiaguo-webapp",
+  "author": "uhavemyword",
+  "homepage": "https://github.com/uhavemyword/jiaguo",
+  "copyright": "Core UI & Ben",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --proxy-config proxy.conf.json",
+    "build": "ng build --prod",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "5.2.1",
+    "@angular/common": "5.2.1",
+    "@angular/compiler": "5.2.1",
+    "@angular/core": "5.2.1",
+    "@angular/forms": "5.2.1",
+    "@angular/http": "5.2.1",
+    "@angular/platform-browser": "5.2.1",
+    "@angular/platform-browser-dynamic": "5.2.1",
+    "@angular/router": "5.2.1",
+    "@angular/upgrade": "5.2.1",
+    "bootstrap": "4.0.0",
+    "chart.js": "2.7.1",
+    "cordova-android": "7.0.0",
+    "cordova-browser": "5.0.3",
+    "cordova-plugin-whitelist": "1",
+    "core-js": "2.5.3",
+    "flag-icon-css": "2.9.0",
+    "font-awesome": "^4.7.0",
+    "jwt-decode": "^2.2.0",
+    "moment": "2.20.1",
+    "ng-busy": "^1.4.6",
+    "ng2-charts": "1.6.0",
+    "ngx-bootstrap": "2.0.0",
+    "rxjs": "5.5.6",
+    "simple-line-icons": "^2.4.1",
+    "ts-helpers": "1.1.2",
+    "zone.js": "0.8.20"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.6.7",
+    "@angular/compiler-cli": "5.2.1",
+    "@angular/language-service": "5.2.1",
+    "@types/jasmine": "2.8.4",
+    "@types/jasminewd2": "2.0.3",
+    "@types/node": "9.3.0",
+    "codelyzer": "4.1.0",
+    "jasmine-core": "2.9.0",
+    "jasmine-spec-reporter": "4.2.1",
+    "karma": "2.0.0",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-cli": "1.0.1",
+    "karma-coverage-istanbul-reporter": "1.3.3",
+    "karma-jasmine": "1.1.1",
+    "karma-jasmine-html-reporter": "0.2.2",
+    "protractor": "5.2.2",
+    "ts-node": "4.1.0",
+    "tslint": "5.9.1",
+    "typescript": "2.6.2"
+  },
+  "engines": {
+    "node": ">= 8.9.4",
+    "npm": ">= 5.6.0"
+  },
+  "cordova": {
+    "platforms": [
+      "browser",
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-whitelist": {}
+    }
+  }
+}

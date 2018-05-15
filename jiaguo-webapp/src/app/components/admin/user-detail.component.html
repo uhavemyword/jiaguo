@@ -1,0 +1,37 @@
+<div [ngBusy]="busy">
+
+  <div *ngIf="model;else notExist">
+    <div class="col-md-6">
+      <div class="card">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate class="was-validated ng-untouched ng-pristine ng-valid">
+          <div class="card-header">
+            <strong>User - {{model.id>0 ? model.id : 'New'}}</strong>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-col-form-label" for="name">Name</label>
+              <input type="text" class="form-control" placeholder="Name" id="name" name="name" [(ngModel)]="model.name" #name="ngModel"
+                required [ngClass]="{ 'is-invalid': f.submitted && !name.valid }" />
+              <div *ngIf="f.submitted && !name.valid" class="invalid-feedback">Name is required</div>
+            </div>
+            <div class="form-group">
+              <label class="form-col-form-label" for="email">Email</label>
+              <input type="text" class="form-control" placeholder="Email" id="email" name="email" [(ngModel)]="model.email">
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-primary" type="submit">
+              <i class="fa fa-dot-circle-o"></i> Save</button>
+            <button class="btn btn-sm btn-danger" type="reset" (click)="goBack()">
+              <i class="fa fa-ban"></i> Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <ng-template #notExist>
+    <!-- <div class="alert alert-danger" role="alert">
+      The user doesn't exist!
+    </div> -->
+  </ng-template>
+</div>
