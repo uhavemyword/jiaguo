@@ -20,6 +20,6 @@ public class AccountController {
         if ("a".equals(loginModel.getUsername()) && "b".equals(loginModel.getPassword())) {
             return JwtTokenHelper.create(loginModel.getUsername(), new String[]{"rolea", "roleb"});
         }
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username or password is incorrect!");
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username or password is incorrect! Try a/b :)");
     }
 }

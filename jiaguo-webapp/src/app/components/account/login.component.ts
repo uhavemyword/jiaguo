@@ -24,6 +24,10 @@ export class LoginComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    // FIXME remove
+    this.model.username = 'a';
+    this.model.password = 'b';
   }
 
   login() {
