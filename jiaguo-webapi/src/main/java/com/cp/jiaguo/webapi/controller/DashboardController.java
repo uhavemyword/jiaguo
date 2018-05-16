@@ -49,7 +49,7 @@ public class DashboardController {
                 map.put("productCount", String.valueOf(model.getProductCount()));
                 map.put("userCount", String.valueOf(model.getUserCount()));
                 jedis.hmset(CACHE_KEY, map);
-                jedis.expire(CACHE_KEY, 120);
+                jedis.expire(CACHE_KEY, 60);
             }
             jedis.close();
         } else {
