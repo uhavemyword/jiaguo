@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/dashboard")
 public class DashboardController {
@@ -27,24 +30,32 @@ public class DashboardController {
 
     @GetMapping("/demo")
     public DashboardModel getDemo() {
-        DashboardModel model = new DashboardModel();
-        model.setProductCount(getOrSetProductCountCache());
-        model.setUserCount(userService.getCount());
+        DashboardModel model = getOrSetCache();
         return model;
     }
 
-    private synchronized long getOrSetProductCountCache() {
+    private synchronized DashboardModel getOrSetCache() {
+        DashboardModel model = new DashboardModel();
         Jedis jedis = getJedis();
         if (jedis != null) {
-            String value = jedis.get(CACHE_KEY);
-            if (value == null) {
-                value = productService.getCount().toString();
-                jedis.setex(CACHE_KEY, 120, value);
+            Map<String, String> map = jedis.hgetAll(CACHE_KEY);
+            if (map != null && !map.isEmpty()) {
+                model.setProductCount(Long.valueOf(map.get("productCount")));
+                model.setUserCount(Long.valueOf(map.get("userCount")));
+                model.setCache(true);
+            } else {
+                refreshModel(model);
+                map = new HashMap<>();
+                map.put("productCount", String.valueOf(model.getProductCount()));
+                map.put("userCount", String.valueOf(model.getUserCount()));
+                jedis.hmset(CACHE_KEY, map);
+                jedis.expire(CACHE_KEY, 120);
             }
             jedis.close();
-            return Long.valueOf(value);
+        } else {
+            refreshModel(model);
         }
-        return productService.getCount();
+        return model;
     }
 
     private Jedis getJedis() {
@@ -57,4 +68,9 @@ public class DashboardController {
         return jedis;
     }
 
+    private void refreshModel(DashboardModel model) {
+        model.setProductCount(productService.getCount());
+        model.setUserCount(userService.getCount());
+        model.setCache(false);
+    }
 }
