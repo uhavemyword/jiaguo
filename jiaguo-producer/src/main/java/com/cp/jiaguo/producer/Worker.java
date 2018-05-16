@@ -13,6 +13,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.io.IOException;
 import java.net.URI;
 
 @Component
@@ -33,6 +35,13 @@ public class Worker {
                 .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36")
                 .build();
         httpClient.start();
+    }
+
+    @PreDestroy
+    public void clean() throws IOException {
+        if (httpClient != null) {
+            httpClient.close();
+        }
     }
 
     @Scheduled(fixedRateString = "${my.task.interval}")

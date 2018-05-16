@@ -1,6 +1,5 @@
 package com.cp.jiaguo.producer;
 
-import com.alibaba.fastjson.JSON;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -35,6 +35,16 @@ public class ResultHandler implements FutureCallback<HttpResponse> {
         rabbitFactory.setPort(config.getRabbitPort());
         rabbitFactory.setUsername(config.getRabbitUser());
         rabbitFactory.setPassword(config.getRabbitPassword());
+    }
+
+    @PreDestroy
+    public void clean() throws IOException, TimeoutException {
+        if (channel != null) {
+            channel.close();
+        }
+        if (connection != null) {
+            connection.close();
+        }
     }
 
     private boolean ensureChannelOpen() {

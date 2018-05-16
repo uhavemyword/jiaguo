@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeoutException;
@@ -31,6 +32,16 @@ public class Worker {
         rabbitFactory.setPort(config.getRabbitPort());
         rabbitFactory.setUsername(config.getRabbitUser());
         rabbitFactory.setPassword(config.getRabbitPassword());
+    }
+    
+    @PreDestroy
+    public void clean() throws IOException, TimeoutException {
+        if (channel != null) {
+            channel.close();
+        }
+        if (connection != null) {
+            connection.close();
+        }
     }
 
     private boolean ensureChannelOpen() {
