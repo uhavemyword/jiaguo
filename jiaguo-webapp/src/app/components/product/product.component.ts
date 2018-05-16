@@ -19,7 +19,10 @@ export class ProductComponent implements OnInit {
   }
 
   refresh() {
-    this.busy = this.productService.getRandom(30).subscribe(p => this.products = p);
+    this.busy = this.productService.getRandom(30).subscribe(ps => this.products = ps);
   }
 
+  showMore() {
+    this.productService.getRandom(30).subscribe(ps => ps.forEach((p) => this.products.push(p)));
+  }
 }
