@@ -29,7 +29,7 @@ public class DashboardController {
     public DashboardModel getDemo() {
         DashboardModel model = new DashboardModel();
         model.setProductCount(getOrSetProductCountCache());
-        model.setUesrCount(userService.getCount());
+        model.setUserCount(userService.getCount());
         return model;
     }
 

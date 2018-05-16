@@ -2,7 +2,7 @@ package com.cp.jiaguo.webapi.model;
 
 public class DashboardModel {
     private long productCount;
-    private long uesrCount;
+    private long userCount;
 
     public long getProductCount() {
         return productCount;
@@ -12,11 +12,11 @@ public class DashboardModel {
         this.productCount = productCount;
     }
 
-    public long getUesrCount() {
-        return uesrCount;
+    public long getUserCount() {
+        return userCount;
     }
 
-    public void setUesrCount(long uesrCount) {
-        this.uesrCount = uesrCount;
+    public void setUserCount(long userCount) {
+        this.userCount = userCount;
     }
 }
