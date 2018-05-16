@@ -27,29 +27,34 @@ public class DashboardController {
 
     @GetMapping("/demo")
     public DashboardModel getDemo() {
-
         DashboardModel model = new DashboardModel();
-        model.setProductCount(Long.valueOf(getProductCountWithCache()));
+        model.setProductCount(getOrSetProductCountCache());
         model.setUesrCount(userService.getCount());
         return model;
     }
 
-    private String getProductCountWithCache() {
+    private synchronized long getOrSetProductCountCache() {
+        Jedis jedis = getJedis();
+        if (jedis != null) {
+            String value = jedis.get(CACHE_KEY);
+            if (value == null) {
+                value = productService.getCount().toString();
+                jedis.setex(CACHE_KEY, 120, value);
+            }
+            jedis.close();
+            return Long.valueOf(value);
+        }
+        return productService.getCount();
+    }
+
+    private Jedis getJedis() {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
         } catch (Exception ex) {
             log.error("Failed to get resource from Jedis pool.", ex);
         }
-
-        if (jedis != null) {
-            String value = jedis.get(CACHE_KEY);
-            if (value == null) {
-                value = productService.getCount().toString();
-                jedis.setex(CACHE_KEY, 60, value);
-            }
-            return value;
-        }
-        return productService.getCount().toString();
+        return jedis;
     }
+
 }
