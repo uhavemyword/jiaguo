@@ -4,5 +4,6 @@ export * from './alert.service';
 export * from './dialog.service';
 export * from './user.service';
 export * from './product-info.service';
+export * from './dashboard.service';
 
 export * from './core-services.module';

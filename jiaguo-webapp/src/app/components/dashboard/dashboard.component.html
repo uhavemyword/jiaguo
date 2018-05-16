@@ -1,3 +1,41 @@
-<div class="animated fadeIn">
-  Hello World!
+<div class="row animated fadeIn">
+  <div class="col-sm-6 col-lg-3">
+    <div class="card">
+      <div class="card-body p-0 clearfix">
+        <i class="fa fa-product-hunt bg-primary p-4 font-2xl mr-3 float-left"></i>
+        <div class="h5 text-primary mb-0 pt-3">{{model.productCount}}</div>
+        <div class="text-muted font-weight-bold font-xs">Product Count</div>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+  <div class="col-sm-6 col-lg-3">
+    <div class="card">
+      <div class="card-body p-0 clearfix">
+        <i class="fa fa-user-circle bg-info p-4 font-2xl mr-3 float-left"></i>
+        <div class="h5 text-info mb-0 pt-3">{{model.userCount}}</div>
+        <div class="text-muted font-weight-bold font-xs">User Count</div>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+  <div class="col-sm-6 col-lg-3">
+    <div class="card">
+      <div class="card-body p-0 clearfix">
+        <i class="fa fa-bell p-4 font-2xl mr-3 float-left" [class.bg-danger]="model.cache" [class.bg-success]="!model.cache"></i>
+        <div class="h5 text-uppercase mb-0 pt-3" [class.text-danger]="model.cache" [class.text-success]="!model.cache">{{model.cache}}</div>
+        <div class="text-muted font-weight-bold font-xs">Is Cache</div>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+  <div class="col-sm-6 col-lg-3">
+    <div class="card">
+      <div class="card-body p-0 clearfix">
+        <i class="fa fa-circle-o-notch fa-spin bg-warning p-4 font-2xl mr-3 float-left"></i>
+        <div class="h5 text-warning mb-0 pt-3">{{date.getMilliseconds()}}</div>
+        <div class="text-muted font-weight-bold font-xs">Mock</div>
+      </div>
+    </div>
+  </div>
 </div>
