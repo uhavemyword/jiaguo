@@ -28,6 +28,6 @@ export class AppComponent implements OnInit {
       })
       .filter((route) => route.outlet === 'primary')
       .mergeMap((route) => route.data)
-      .subscribe((event) => this.titleService.setTitle('MyApp - ' + event['title']));
+      .subscribe((event) => this.titleService.setTitle('JiaGuo - ' + event['title']));
   }
 }
