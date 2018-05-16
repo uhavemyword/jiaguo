@@ -50,4 +50,8 @@
         delete from contact where user_id = #{id}
     </delete>
 
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from contact
+    </select>
+
 </mapper>

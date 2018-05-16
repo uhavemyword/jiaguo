@@ -24,8 +24,4 @@ public class ProductServiceImpl extends EntityServiceImpl<Product, ProductDao> i
         return productDao.getRandom(count);
     }
 
-    @Override
-    public long getCount(){
-        return productDao.getCount();
-    }
 }

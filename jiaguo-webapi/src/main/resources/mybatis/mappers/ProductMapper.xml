@@ -24,7 +24,7 @@
         limit #{count}
     </select>
 
-    <select id="getCount" resultType="java.lang.Long">
+    <select id="getCount" resultType="java.lang.Integer">
         select count(*) from product
     </select>
 

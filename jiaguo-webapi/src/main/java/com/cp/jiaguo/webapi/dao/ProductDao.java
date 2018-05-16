@@ -10,5 +10,4 @@ import java.util.List;
 public interface ProductDao extends EntityDao<Product> {
     List<Product> getTop(int count);
     List<Product> getRandom(int count);
-    long getCount();
 }

@@ -23,7 +23,7 @@ public class EntityServiceImpl<E extends BaseEntity, D extends EntityDao<E>> imp
 
     @Override
     public void insert(E entity) {
-         this.dao.insert(entity);
+        this.dao.insert(entity);
     }
 
     @Override
@@ -34,5 +34,10 @@ public class EntityServiceImpl<E extends BaseEntity, D extends EntityDao<E>> imp
     @Override
     public void deleteById(Integer id) {
         this.dao.deleteById(id);
+    }
+
+    @Override
+    public Integer getCount() {
+        return this.dao.getCount();
     }
 }

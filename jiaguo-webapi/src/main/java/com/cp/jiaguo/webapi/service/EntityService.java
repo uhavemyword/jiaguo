@@ -14,4 +14,6 @@ public interface EntityService<E extends BaseEntity> {
     void update(E entity);
 
     void deleteById(Integer id);
+
+    Integer getCount();
 }
