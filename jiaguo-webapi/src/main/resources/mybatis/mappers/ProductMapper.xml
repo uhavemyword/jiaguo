@@ -18,12 +18,12 @@
     </select>
 
     <select id="getRandom" resultType="Product">
-        select id, external_id as externalId, info_json as infoJson
-        from product
-        where id in (
-            select id from product
-            order by rand())
-        limit #{count}
+        select p1.id as id, external_id as externalId, info_json as infoJson
+        from product p1
+        inner join (
+			select id from product
+            order by rand() limit #{count}) p2
+		on p1.id = p2.id
     </select>
 
     <select id="getCount" resultType="java.lang.Integer">
