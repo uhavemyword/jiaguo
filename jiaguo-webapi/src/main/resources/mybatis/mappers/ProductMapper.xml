@@ -20,7 +20,9 @@
     <select id="getRandom" resultType="Product">
         select id, external_id as externalId, info_json as infoJson
         from product
-        order by rand()
+        where id in (
+            select id from product
+            order by rand())
         limit #{count}
     </select>
 

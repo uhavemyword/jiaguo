@@ -36,7 +36,7 @@ public class ProductInfoController {
 
     @GetMapping("/top/{count}")
     public List<JSONObject> getTop(@PathVariable("count") Integer count) {
-        if (count < 1 || count > 1000) {
+        if (count < 1 || count > 100) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Count too large or too small!");
         }
         List<Product> products = this.service.getTop(count);
@@ -45,7 +45,7 @@ public class ProductInfoController {
 
     @GetMapping("/random/{count}")
     public List<JSONObject> getRandom(@PathVariable("count") Integer count) {
-        if (count < 1 || count > 1000) {
+        if (count < 1 || count > 100) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Count too large or too small!");
         }
         List<Product> products = this.service.getRandom(count);
