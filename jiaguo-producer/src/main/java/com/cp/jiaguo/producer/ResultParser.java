@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 @Component
 public class ResultParser {
     private static final Logger log = LoggerFactory.getLogger(ResultParser.class);
-    private static final String PATTERN = "id=\"r-props-J-gallery\"><!--(.+)-->";
+    private static final String REGEX = "id=\"r-props-J-gallery\"><!--(.+)-->";
+    private static final Pattern pattern = Pattern.compile(REGEX);
 
     public ResultModel parse(String html) {
-        Pattern pattern = Pattern.compile(PATTERN);
         Matcher matcher = pattern.matcher(html);
         if (matcher.find()) {
             String jsonString = matcher.group(1);
