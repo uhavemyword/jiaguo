@@ -1,14 +1,14 @@
 package com.cp.jiaguo.webapi.model;
 
 public class Product extends BaseEntity {
-    private int externalId;
+    private Integer externalId;
     private String infoJson;
 
-    public int getExternalId() {
+    public Integer getExternalId() {
         return externalId;
     }
 
-    public void setExternalId(int externalId) {
+    public void setExternalId(Integer externalId) {
         this.externalId = externalId;
     }
 
